@@ -41,10 +41,9 @@ class LinkedList {
   }
 
   deleteLast () {
+    if ( !this.head ) throw new Error('List is empty')
+
     let result
-
-    if ( !this.head ) return null
-
     if ( !this.head.next ) {
       result = this.head.data
       this.head = null
@@ -65,6 +64,7 @@ class LinkedList {
   }
 
   insertAtIndex (data, index) {
+    if ( index > this.size ) throw new Error('Index out of bounds')
     if ( index === 0 ) {
       this.insertFirst(data)
       return
@@ -81,14 +81,26 @@ class LinkedList {
       current = current.next
       currentIndex++
     }
+
     this.size++
   }
 
   deleteAtIndex (index) {
+    let result
+
+    if ( this.size === 0 ) throw new Error('List is empty')
+    if ( this.size < index ) throw new Error('Index is out of bounds')
+
+    if ( index === 0 ) {
+      result = this.head.data
+      this.head = this.head.next
+      this.size--
+      return result
+    }
+
     let current = this.head
     let currentIndex = 0
     let previous
-    let result
 
     if ( index < this.size ) {
       while ( current ) {
