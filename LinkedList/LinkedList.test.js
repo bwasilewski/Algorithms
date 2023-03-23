@@ -16,6 +16,30 @@ describe('LinkedList', () => {
     })
   })
 
+  describe('getFirst', () => {
+    it('should return the first node of the list', () => {
+      const linkedList = new LinkedList([1,2,3])
+      expect(linkedList.getFirst()).toBe(1)
+    })
+
+    it('should return null if the list is empty', () => {
+      const linkedList = new LinkedList()
+      expect(linkedList.getFirst()).toBeNull()
+    })
+  })
+
+  describe('getLast', () => {
+    it('should return the last node of the list', () => {
+      const linkedList = new LinkedList([1,2,3])
+      expect(linkedList.getLast()).toBe(3)
+    })
+
+    it('should return null if the list is empty', () => {
+      const linkedList = new LinkedList()
+      expect(linkedList.getLast()).toBeNull()
+    })
+  })
+
   describe('insertFirst', () => {
     it('should insert a new node at the beginning of the list', () => {
       const linkedList = new LinkedList([1,2,3])

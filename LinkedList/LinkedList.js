@@ -16,6 +16,21 @@ class LinkedList {
     this.size = data.length
   }
 
+  getFirst () {
+    return this.head ? this.head.data : null
+  }
+
+  getLast () {
+    if ( !this.head ) return null
+    let current = this.head
+    while ( current ) {
+      if ( current.next === null ) {
+        return current.data
+      }
+      current = current.next
+    }
+  }
+
   insertFirst (data) {
     this.head = new Node(data, this.head)
     this.size++
