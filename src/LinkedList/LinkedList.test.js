@@ -254,4 +254,18 @@ describe('LinkedList', () => {
       expect(() => linkedList.forEach(node => node.data)).toThrow()
     })
   })
+
+  describe('map', () => {
+    it('should iterate over the list', () => {
+      const linkedList = new LinkedList([1,2,3])
+      const arr = []
+      linkedList.map(node => arr.push(node.data))
+      expect(arr).toEqual([1,2,3])
+    })
+
+    it('should throw an error if the list is empty', () => {
+      const linkedList = new LinkedList()
+      expect(() => linkedList.map(node => node.data)).toThrow()
+    }) 
+  })
 })

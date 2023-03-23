@@ -179,7 +179,18 @@ class LinkedList {
     }
   }
 
-  map () {}
+  map (callback) {
+    if ( !this.head ) throw new Error('The list is empty')
+    let current = this.head
+    let output = []
+
+    while ( current ) {
+      output.push(callback(current))
+      current = current.next
+    }
+
+    return output
+  }
 
   filter () {}
 
