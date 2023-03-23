@@ -131,9 +131,7 @@ class LinkedList {
       }
       this.size--
       return result
-    } else {
-      return null
-    }
+    } 
   }
 
   printData () {
@@ -147,6 +145,54 @@ class LinkedList {
 
     return out.join(' ')
   }
+
+  search (query) {
+    if ( this.size === 0 ) return -1
+    let index = 0
+    let current = this.head
+
+    while ( current.next ) {
+      if ( current.data === query ) {
+        return index
+      }
+
+      current = current.next
+      index++
+    }
+
+    return -1
+  }
+
+  clear () {
+    this.head = null
+    this.size = 0
+  }
+
+  forEach (callback) {
+    if ( !this.head ) throw new Error('List is empty')
+
+    let current = this.head
+
+    while ( current ) {
+      callback(current)
+      current = current.next
+    }
+  }
+
+  map () {}
+
+  filter () {}
+
+  reduce () {}
+
+  reverse () {}
+
+  toArray () {}
+
+  fromArray () {}
+
+  toString () {}
+
 }
 
 module.exports = LinkedList

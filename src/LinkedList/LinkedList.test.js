@@ -207,4 +207,51 @@ describe('LinkedList', () => {
       expect(linkedList.printData()).toBe('1 2 3')
     })
   })
+
+  describe('search', () => {
+    it('should return the index of a given data', () => {
+      const linkedList = new LinkedList([1,2,3])
+      expect(linkedList.search(2)).toBe(1)
+    })
+
+    it('should return -1 if the data is not found', () => {
+      const linkedList = new LinkedList([1,2,3])
+      expect(linkedList.search(4)).toBe(-1)
+    })
+
+    it('should return -1 if the list is empty', () => {
+      const linkedList = new LinkedList()
+      expect(linkedList.search(4)).toBe(-1)
+    })
+  })
+
+  describe('clear', () => {
+    it('should clear the list', () => {
+      const linkedList = new LinkedList([1,2,3])
+      linkedList.clear()
+      expect(linkedList.head).toBeNull()
+      expect(linkedList.size).toBe(0)
+    })
+
+    it('should clear the list', () => {
+      const linkedList = new LinkedList()
+      linkedList.clear()
+      expect(linkedList.head).toBeNull()
+      expect(linkedList.size).toBe(0)
+    })
+  })
+
+  describe('forEach', () => {
+    it('should iterate over the list', () => {
+      const linkedList = new LinkedList([1,2,3])
+      const arr = []
+      linkedList.forEach(node => arr.push(node.data))
+      expect(arr).toEqual([1,2,3])
+    })
+
+    it('should throw an error if the list is empty', () => {
+      const linkedList = new LinkedList()
+      expect(() => linkedList.forEach(node => node.data)).toThrow()
+    })
+  })
 })
