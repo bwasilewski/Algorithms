@@ -16,19 +16,34 @@ class LinkedList {
     this.size = data.length
   }
 
+  every (callback, unless = null) {
+    let current = this.head
+
+    if ( current ) {
+      while ( current ) {
+        callback && callback(current)
+        current = current.next
+      }
+    } else {
+      unless && unless()
+    }
+
+    return current
+  }
+
   getFirst () {
     return this.head ? this.head.data : null
   }
 
   getLast () {
     if ( !this.head ) return null
-    let current = this.head
-    while ( current ) {
+    let output
+    this.every(current => {
       if ( current.next === null ) {
-        return current.data
+        output = current.data
       }
-      current = current.next
-    }
+    })
+    return output
   }
 
   insertFirst (data) {
@@ -42,15 +57,9 @@ class LinkedList {
   }
 
   insertLast (data) {
-    let current = this.head
-
-    if (current) {
-      while ( current.next ) {
-        current = current.next
-      }
-    } else {
+    this.every(null, () => {
       this.head = new Node(data)
-    }
+    })
 
     this.size++
   }
@@ -66,14 +75,12 @@ class LinkedList {
       return result
     }
 
-    let current = this.head
     let previous
 
-    while ( current.next ) {
+    let current = this.every(current => {
       previous = current
-      current = current.next
-    }
-    
+    })
+
     current = null
     this.size--
   }
@@ -85,17 +92,14 @@ class LinkedList {
       return
     }
 
-    let current = this.head
     let currentIndex = 0
 
-    while ( current ) {
+    this.every(current => {
       if ( currentIndex === index - 1 ) {
         current.next = new Node(data, current.next)
-        break
       }
-      current = current.next
       currentIndex++
-    }
+    })
 
     this.size++
   }
@@ -135,13 +139,11 @@ class LinkedList {
   }
 
   printData () {
-    let current = this.head
     let out = []
 
-    while ( current ) {
+    this.every((current) => {
       out.push(current.data)
-      current = current.next
-    }
+    })
 
     return out.join(' ')
   }
